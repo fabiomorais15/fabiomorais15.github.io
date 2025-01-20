@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.mycareforce",
+      "sha256_cert_fingerprints": [
+        "37:07:3D:74:27:6B:B0:0C:F5:CA:2B:88:69:0A:B9:99:36:53:0F:66:79:D2:85:6B:A6:66:B2:17:76:77:CC:93"
+      ]
+    }
+  }
+]
