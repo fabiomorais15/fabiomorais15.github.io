@@ -13,11 +13,17 @@
       // Fallback URLs for the app store
       const androidStoreLink = "https://play.google.com/store/apps/details?id=com.mycareforce";
       const iosStoreLink = "https://apps.apple.com/app/id6450905583"; // Replace with your app's App Store URL
+      const macAppStoreLink = "https://apps.apple.com/us/app/id6450905583"; // Use the macOS App Store URL if different
 
       // Detect the user's platform
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      const isMacOS = /Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints === 0;
 
-      const storeLink = isIOS ? iosStoreLink : androidStoreLink;
+      const storeLink = isIOS
+        ? iosStoreLink
+        : isMacOS
+        ? macAppStoreLink
+        : androidStoreLink;
 
       const openApp = () => {
         const timeout = 500; // Timeout for detecting app launch
@@ -29,8 +35,8 @@
         }, timeout);
 
         // Try to open the app
-        if (isIOS) {
-          // iOS: Use a Universal Link or the deep link
+        if (isIOS || isMacOS) {
+          // Use a Universal Link or the deep link
           window.location.href = appLink;
         } else {
           // Android: Use an iframe to avoid visible navigation
