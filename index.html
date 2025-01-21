@@ -3,7 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Deep Link Example</title>
   </head>
-  <body></body>
+  <body>
+    <script>
+      // The app's deep link URL scheme (modify this for your app)
+      const appLink = "myapp://open";
+      // Fallback URL for the app store
+      const appStoreLink =
+        "https://play.google.com/store/apps/details?id=com.mycareforce";
+
+      // Attempt to open the app
+      const openApp = () => {
+        const now = Date.now();
+        const timeout = 500;
+
+        // Redirect to app store if app is not opened within the timeout
+        const timer = setTimeout(() => {
+          window.location.href = appStoreLink;
+        }, timeout);
+
+        // Try to open the app
+        const iframe = document.createElement("iframe");
+        iframe.src = appLink;
+        iframe.style.display = "none";
+        document.body.appendChild(iframe);
+
+        // Clear the timer if the app opens
+        window.addEventListener("blur", () => clearTimeout(timer), { once: true });
+      };
+
+      // Run the detection script
+      openApp();
+    </script>
+  </body>
 </html>
