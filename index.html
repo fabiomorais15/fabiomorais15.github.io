@@ -7,27 +7,38 @@
   </head>
   <body>
     <script>
-      // The app's deep link URL scheme (modify this for your app)
+      // The app's deep link URL scheme
       const appLink = "com.mycareforce://open";
-      // Fallback URL for the app store
-      const appStoreLink =
-        "https://play.google.com/store/apps/details?id=com.mycareforce";
 
-      // Attempt to open the app
+      // Fallback URLs for the app store
+      const androidStoreLink = "https://play.google.com/store/apps/details?id=com.mycareforce";
+      const iosStoreLink = "https://apps.apple.com/app/id123456789"; // Replace with your app's App Store URL
+
+      // Detect the user's platform
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+      const storeLink = isIOS ? iosStoreLink : androidStoreLink;
+
       const openApp = () => {
+        const timeout = 500; // Timeout for detecting app launch
         const now = Date.now();
-        const timeout = 500;
 
-        // Redirect to app store if app is not opened within the timeout
+        // Redirect to the app store if the app is not opened
         const timer = setTimeout(() => {
-          window.location.href = appStoreLink;
+          window.location.href = storeLink;
         }, timeout);
 
         // Try to open the app
-        const iframe = document.createElement("iframe");
-        iframe.src = appLink;
-        iframe.style.display = "none";
-        document.body.appendChild(iframe);
+        if (isIOS) {
+          // iOS: Use a Universal Link or the deep link
+          window.location.href = appLink;
+        } else {
+          // Android: Use an iframe to avoid visible navigation
+          const iframe = document.createElement("iframe");
+          iframe.src = appLink;
+          iframe.style.display = "none";
+          document.body.appendChild(iframe);
+        }
 
         // Clear the timer if the app opens
         window.addEventListener("blur", () => clearTimeout(timer), { once: true });
