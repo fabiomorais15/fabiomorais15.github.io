@@ -1,0 +1,23 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "WQXWDTCCK3.com.mycareforce",
+        "paths": [
+          "/"
+        ]
+      }
+    ]
+  },
+  "activitycontinuation": {
+    "apps": [
+      "WQXWDTCCK3.com.mycareforce"
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "WQXWDTCCK3.com.mycareforce"
+    ]
+  }
+}
