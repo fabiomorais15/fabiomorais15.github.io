@@ -3,19 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Deep Link Example</title>
+    <title>Deep Link Redirect</title>
+    <meta name="apple-itunes-app" content="app-id=6450905583, affiliate-data=, app-argument=com.mycareforce://open">
   </head>
   <body>
     <script>
-      // The app's deep link URL scheme
-      const appLink = "com.mycareforce://open";
-
-      // Fallback URLs for the app store
+      const appDeepLink = "com.mycareforce://open";
       const androidStoreLink = "https://play.google.com/store/apps/details?id=com.mycareforce";
-      const iosStoreLink = "https://apps.apple.com/pt/app/mycareforce/id6450905583"; // Replace with your app's App Store URL
-      const macAppStoreLink = "https://apps.apple.com/pt/app/mycareforce/id6450905583"; // Use the macOS App Store URL if different
+      const iosStoreLink = "https://apps.apple.com/pt/app/mycareforce/id6450905583";
+      const macAppStoreLink = "https://apps.apple.com/pt/app/mycareforce/id6450905583";
 
-      // Detect the user's platform
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
       const isMacOS = /Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints === 0;
 
@@ -26,32 +23,23 @@
         : androidStoreLink;
 
       const openApp = () => {
-        const timeout = 500; // Timeout for detecting app launch
-        const now = Date.now();
-
-        // Redirect to the app store if the app is not opened
         const timer = setTimeout(() => {
-          window.location.href = storeLink;
-        }, timeout);
+          window.location.href = storeLink; // Redirect faster
+        }, 300); // Reduced timeout
 
-        // Try to open the app
         if (isIOS || isMacOS) {
-          // Use a Universal Link or the deep link
-          window.location.href = appLink;
+          window.location.href = appDeepLink;
         } else {
-          // Android: Use an iframe to avoid visible navigation
           const iframe = document.createElement("iframe");
-          iframe.src = appLink;
+          iframe.src = appDeepLink;
           iframe.style.display = "none";
           document.body.appendChild(iframe);
         }
 
-        // Clear the timer if the app opens
         window.addEventListener("blur", () => clearTimeout(timer), { once: true });
       };
 
-      // Run the detection script
-      openApp();
+      openApp(); // Trigger automatically
     </script>
   </body>
 </html>
