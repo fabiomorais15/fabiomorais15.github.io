@@ -6,7 +6,7 @@
         "appID": "WQXWDTCCK3.com.mycareforce",
         "paths": [
           "/",
-          "/App/Wallet"
+          "/App/*"
         ]
       }
     ]
