@@ -3,7 +3,10 @@
     "apps": [],
     "details": [
       {
-        "appID": "WQXWDTCCK3.com.mycareforce"
+        "appID": "WQXWDTCCK3.com.mycareforce",
+        "paths": [
+          "*"
+        ]
       }
     ]
   },
