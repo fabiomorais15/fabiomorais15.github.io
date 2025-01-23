@@ -3,12 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appID": "WQXWDTCCK3.com.mycareforce",
-        "paths": [
-          "/",
-          "/app",
-          "/app/wallet"
-        ]
+        "appID": "WQXWDTCCK3.com.mycareforce"
       }
     ]
   },
